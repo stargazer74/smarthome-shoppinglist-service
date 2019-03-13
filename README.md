@@ -1,2 +1,2 @@
 # smarthome-shoppinglist-service
-service for shopping list service
+service for shopping list component
