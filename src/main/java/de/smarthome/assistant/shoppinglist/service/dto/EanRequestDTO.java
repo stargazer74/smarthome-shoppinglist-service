@@ -21,16 +21,37 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist;
+package de.smarthome.assistant.shoppinglist.service.dto;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+public class EanRequestDTO {
 
-@SpringBootApplication
-public class ShoppinglistApplication {
+    private String productName;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ShoppinglistApplication.class, args);
-	}
+    private String category;
 
+    private String subCategory;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
 }

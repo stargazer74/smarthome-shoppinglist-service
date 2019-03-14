@@ -21,16 +21,38 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist;
+package de.smarthome.assistant.shoppinglist.service.util;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
-@SpringBootApplication
-public class ShoppinglistApplication {
+@Component
+public class EanMarshaller {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ShoppinglistApplication.class, args);
-	}
+    public EanRequestDTO unmarshall(String requestResult){
+        return null;
+    }
 
+    private Map<String, String> generateMap(final String response)  {
+        final String[] lines = response.split("\\r?\\n");
+
+        final String[] url = lines[0].split("=", 2);
+        final String[] pk = lines[1].split("=");
+        final String[] a_id = lines[2].split("=");
+
+
+        HashMap<String, String> returnMap = new HashMap<>();
+        returnMap.put(url[0], url[1]);
+        returnMap.put(pk[0], pk[1]);
+        returnMap.put(a_id[0], a_id[1]);
+
+        if (!returnMap.containsKey("url") || !returnMap.containsKey("pk") || !returnMap.containsKey("a_id"))
+;
+
+        return returnMap;
+    }
 }

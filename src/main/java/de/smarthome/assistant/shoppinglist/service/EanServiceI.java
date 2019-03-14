@@ -21,16 +21,11 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist;
+package de.smarthome.assistant.shoppinglist.service;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
+import java.util.Map;
 
-@SpringBootApplication
-public class ShoppinglistApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(ShoppinglistApplication.class, args);
-	}
-
+public interface EanServiceI {
+    EanRequestDTO getProductInformation(String ean);
 }
