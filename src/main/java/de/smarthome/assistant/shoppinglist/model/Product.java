@@ -25,15 +25,19 @@ package de.smarthome.assistant.shoppinglist.model;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "product")
@@ -50,4 +54,15 @@ public class Product {
             @JoinColumn(name = "shoppinglist_id", referencedColumnName = "id") })
     private List<ShoppingList> shoppingLists;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private ProductCategory productCategory;
+
+    @NotEmpty
+    @Column(name = "name", nullable = false)
+    private String name;
+
+
+    @Column(name = "ean")
+    private Long ean;
 }

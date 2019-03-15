@@ -23,12 +23,18 @@
 
 package de.smarthome.assistant.shoppinglist.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "product_category")
@@ -38,5 +44,15 @@ public class ProductCategory {
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "product_category_Sequence")
     @SequenceGenerator(name = "product_category_Sequence", sequenceName = "PRODUCT_CATEGORY_SEQ")
     private Long id;
+
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
+
+    @NotEmpty
+    @Column(name = "category", nullable = false)
+    private String category;
+
+    @Column(name = "parentid")
+    private Long parentid;
 
 }

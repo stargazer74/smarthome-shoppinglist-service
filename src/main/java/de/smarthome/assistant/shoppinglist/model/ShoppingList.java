@@ -33,6 +33,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "shoppinglist")
@@ -46,7 +47,35 @@ public class ShoppingList {
     @ManyToMany(mappedBy = "shoppingLists")
     private List<Product> product;
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
+    @NotEmpty
     private LocalDate localDate;
 
+    @NotEmpty
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    public List<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
