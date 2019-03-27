@@ -26,33 +26,42 @@ package de.smarthome.assistant.shoppinglist.service.util;
 import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EanMarshaller {
 
+    /**
+     * unmarshall the incoming text from topengtindb.org
+     *
+     * @param requestResult incoming response
+     * @return an EanRequestDTO
+     */
     public EanRequestDTO unmarshall(String requestResult){
-        return null;
+        Map<String, String> stringStringMap = generateMap(requestResult);
+        EanRequestDTO eanRequestDTO = new EanRequestDTO();
+        eanRequestDTO.setProductName(stringStringMap.get("name"));
+        eanRequestDTO.setCategory(stringStringMap.get("maincat"));
+        eanRequestDTO.setSubCategory(stringStringMap.get("subcat"));
+        return eanRequestDTO;
     }
 
     private Map<String, String> generateMap(final String response)  {
         final String[] lines = response.split("\\r?\\n");
-
-        final String[] url = lines[0].split("=", 2);
-        final String[] pk = lines[1].split("=");
-        final String[] a_id = lines[2].split("=");
-
-
         HashMap<String, String> returnMap = new HashMap<>();
-        returnMap.put(url[0], url[1]);
-        returnMap.put(pk[0], pk[1]);
-        returnMap.put(a_id[0], a_id[1]);
 
-        if (!returnMap.containsKey("url") || !returnMap.containsKey("pk") || !returnMap.containsKey("a_id"))
-;
+        final String[] error = lines[0].split("=", 2);
+        if (error[1]!="0"){
+            final String[] name = lines[3].split("=");
+            final String[] mainCategory = lines[6].split("=");
+            final String[] subCategory = lines[7].split("=");
 
+            returnMap.put(name[0], name[1]);
+            returnMap.put(mainCategory[0], mainCategory[1]);
+            returnMap.put(subCategory[0], subCategory[1]);
+        }else{
+            returnMap.put(error[0], error[1]);
+        }
         return returnMap;
     }
 }
