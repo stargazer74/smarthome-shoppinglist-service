@@ -26,6 +26,7 @@ package de.smarthome.assistant.shoppinglist.service;
 
 import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
 import de.smarthome.assistant.shoppinglist.service.util.EanMarshaller;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -58,7 +59,7 @@ public class EanService implements EanServiceI {
      * @return EanRequestDTO
      */
     @Override
-    public EanRequestDTO getProductInformation(String ean) {
+    public Optional<EanRequestDTO> getProductInformation(String ean) {
         final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(baseUrl).queryParam("ean", ean)
                 .queryParam("cmd", "query").queryParam("queryid", userId).build();
         RestTemplate restTemplate = new RestTemplate();

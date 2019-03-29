@@ -55,7 +55,7 @@ public class Product {
     private List<ShoppingList> shoppingLists;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "product_category_id", nullable = false)
     private ProductCategory productCategory;
 
     @NotEmpty
@@ -63,6 +63,46 @@ public class Product {
     private String name;
 
 
-    @Column(name = "ean")
+    @Column(name = "ean", unique = true)
     private Long ean;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<ShoppingList> getShoppingLists() {
+        return shoppingLists;
+    }
+
+    public void setShoppingLists(List<ShoppingList> shoppingLists) {
+        this.shoppingLists = shoppingLists;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getEan() {
+        return ean;
+    }
+
+    public void setEan(Long ean) {
+        this.ean = ean;
+    }
 }

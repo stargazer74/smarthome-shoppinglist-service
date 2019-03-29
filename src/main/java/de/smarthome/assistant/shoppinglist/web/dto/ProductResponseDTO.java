@@ -21,11 +21,50 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.service;
+package de.smarthome.assistant.shoppinglist.web.dto;
 
-import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
-import java.util.Optional;
+import javax.validation.constraints.NotEmpty;
 
-public interface EanServiceI {
-    Optional<EanRequestDTO> getProductInformation(String ean);
+public class ProductResponseDTO {
+
+    @NotEmpty
+    private String name;
+
+    private String category;
+
+    private String subCategory;
+
+    private String ean;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
 }

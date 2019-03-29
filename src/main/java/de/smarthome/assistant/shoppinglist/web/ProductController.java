@@ -23,10 +23,38 @@
 
 package de.smarthome.assistant.shoppinglist.web;
 
+import de.smarthome.assistant.shoppinglist.component.Product.ProductI;
+import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/product")
 public class ProductController {
+
+    private final ProductI product;
+
+    @Autowired
+    public ProductController(ProductI product) {
+        this.product = product;
+    }
+
+    /**
+     * If the product is found, it returns a response entity with an ProductResponseDTO an status code 200.
+     * Else it returns a status code 404.
+     *
+     * @param ean number
+     * @return ResponseEntity<ProductResponseDTO>
+     */
+    @RequestMapping(value = "/{ean}", method = RequestMethod.GET)
+    public ResponseEntity<ProductResponseDTO> get(@PathVariable("ean") String ean) {
+        return product.getProduct(ean).map(productResponseDTO -> ResponseEntity.ok().body(productResponseDTO))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

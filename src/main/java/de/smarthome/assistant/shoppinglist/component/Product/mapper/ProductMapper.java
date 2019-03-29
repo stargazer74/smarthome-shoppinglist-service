@@ -21,11 +21,17 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.service;
+package de.smarthome.assistant.shoppinglist.component.Product.mapper;
 
-import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
-import java.util.Optional;
+import de.smarthome.assistant.shoppinglist.model.Product;
+import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public interface EanServiceI {
-    Optional<EanRequestDTO> getProductInformation(String ean);
+@Mapper(componentModel = "spring")
+public interface ProductMapper {
+
+    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+
+    ProductResponseDTO product2ProductResponseDto(Product product);
 }

@@ -21,11 +21,12 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.service;
+package de.smarthome.assistant.shoppinglist.repository;
 
-import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
+import de.smarthome.assistant.shoppinglist.model.Product;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EanServiceI {
-    Optional<EanRequestDTO> getProductInformation(String ean);
+public interface ProductRepositoryI extends JpaRepository<Product, Long> {
+    Optional<Product> findByEan(String ean);
 }

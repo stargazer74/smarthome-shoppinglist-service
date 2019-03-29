@@ -21,11 +21,36 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.service;
+package de.smarthome.assistant.shoppinglist.component.Product;
 
-import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
+import de.smarthome.assistant.shoppinglist.component.Product.mapper.ProductMapper;
+import de.smarthome.assistant.shoppinglist.model.Product;
+import de.smarthome.assistant.shoppinglist.repository.ProductRepositoryI;
+import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public interface EanServiceI {
-    Optional<EanRequestDTO> getProductInformation(String ean);
+@Component
+public class ProductDC implements ProductI {
+
+    private final ProductRepositoryI productRepository;
+
+    @Autowired
+    public ProductDC(ProductRepositoryI productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    /**
+     * Returns an Optional of ProductResponseDTO by a given ean number or
+     * else a Optional.empty
+     *
+     * @param ean number
+     * @return Optional of ProductResponseDTO
+     */
+    @Override
+    public Optional<ProductResponseDTO> getProduct(String ean) {
+        final Optional<Product> optionalProduct = this.productRepository.findByEan(ean);
+        return optionalProduct.map(ProductMapper.INSTANCE::product2ProductResponseDto);
+    }
 }

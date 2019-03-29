@@ -21,11 +21,20 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.service;
+package de.smarthome.assistant.shoppinglist.web.dto;
 
-import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
-import java.util.Optional;
+import javax.validation.constraints.NotNull;
 
-public interface EanServiceI {
-    Optional<EanRequestDTO> getProductInformation(String ean);
+public class ProductRequestDTO {
+
+    @NotNull
+    private Long ean;
+
+    public Long getEan() {
+        return ean;
+    }
+
+    public void setEan(Long ean) {
+        this.ean = ean;
+    }
 }

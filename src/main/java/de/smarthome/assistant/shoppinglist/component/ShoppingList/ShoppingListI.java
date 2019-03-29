@@ -21,11 +21,7 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.service;
+package de.smarthome.assistant.shoppinglist.component.ShoppingList;
 
-import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
-import java.util.Optional;
-
-public interface EanServiceI {
-    Optional<EanRequestDTO> getProductInformation(String ean);
+public interface ShoppingListI {
 }

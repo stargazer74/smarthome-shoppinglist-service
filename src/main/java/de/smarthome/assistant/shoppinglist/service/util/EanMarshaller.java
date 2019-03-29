@@ -26,6 +26,7 @@ package de.smarthome.assistant.shoppinglist.service.util;
 import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -37,21 +38,23 @@ public class EanMarshaller {
      * @param requestResult incoming response
      * @return an EanRequestDTO
      */
-    public EanRequestDTO unmarshall(String requestResult){
+    public Optional<EanRequestDTO> unmarshall(String requestResult) {
         Map<String, String> stringStringMap = generateMap(requestResult);
+        if(stringStringMap.containsKey("error"))
+            return Optional.empty();
         EanRequestDTO eanRequestDTO = new EanRequestDTO();
         eanRequestDTO.setProductName(stringStringMap.get("name"));
         eanRequestDTO.setCategory(stringStringMap.get("maincat"));
         eanRequestDTO.setSubCategory(stringStringMap.get("subcat"));
-        return eanRequestDTO;
+        return Optional.of(eanRequestDTO);
     }
 
-    private Map<String, String> generateMap(final String response)  {
+    private Map<String, String> generateMap(final String response) {
         final String[] lines = response.split("\\r?\\n");
         HashMap<String, String> returnMap = new HashMap<>();
 
         final String[] error = lines[0].split("=", 2);
-        if (error[1]!="0"){
+        if (error[1].equals("0")) {
             final String[] name = lines[3].split("=");
             final String[] mainCategory = lines[6].split("=");
             final String[] subCategory = lines[7].split("=");
@@ -59,7 +62,7 @@ public class EanMarshaller {
             returnMap.put(name[0], name[1]);
             returnMap.put(mainCategory[0], mainCategory[1]);
             returnMap.put(subCategory[0], subCategory[1]);
-        }else{
+        } else {
             returnMap.put(error[0], error[1]);
         }
         return returnMap;
