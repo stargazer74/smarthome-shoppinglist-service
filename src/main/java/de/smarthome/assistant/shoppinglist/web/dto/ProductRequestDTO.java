@@ -23,12 +23,18 @@
 
 package de.smarthome.assistant.shoppinglist.web.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class ProductRequestDTO {
 
-    @NotNull
     private Long ean;
+
+    @NotEmpty
+    private String name;
+
+    private String category;
+
+    private String subCategory;
 
     public Long getEan() {
         return ean;
@@ -36,5 +42,29 @@ public class ProductRequestDTO {
 
     public void setEan(Long ean) {
         this.ean = ean;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 }

@@ -24,14 +24,13 @@
 package de.smarthome.assistant.shoppinglist.web;
 
 import de.smarthome.assistant.shoppinglist.component.Product.ProductI;
+import de.smarthome.assistant.shoppinglist.web.dto.ProductRequestDTO;
 import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -55,6 +54,18 @@ public class ProductController {
     @RequestMapping(value = "/{ean}", method = RequestMethod.GET)
     public ResponseEntity<ProductResponseDTO> get(@PathVariable("ean") String ean) {
         return product.getProduct(ean).map(productResponseDTO -> ResponseEntity.ok().body(productResponseDTO))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Insert a new product into database.
+     *
+     * @param productRequestDTO a ProductRequestDTO
+     * @return the ResponseEntity<ProductResponseDTO> of the insert object or status 404 if insert failed
+     */
+    @RequestMapping(value = "/insert", method = RequestMethod.PUT)
+    public ResponseEntity<ProductResponseDTO> insert(ProductRequestDTO productRequestDTO) {
+        return product.addProduct(productRequestDTO).map(productResponseDTO -> ResponseEntity.ok().body(productResponseDTO))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

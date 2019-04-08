@@ -26,6 +26,7 @@ package de.smarthome.assistant.shoppinglist.component.Product;
 import de.smarthome.assistant.shoppinglist.component.Product.mapper.ProductMapper;
 import de.smarthome.assistant.shoppinglist.model.Product;
 import de.smarthome.assistant.shoppinglist.repository.ProductRepositoryI;
+import de.smarthome.assistant.shoppinglist.web.dto.ProductRequestDTO;
 import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class ProductDC implements ProductI {
     public Optional<ProductResponseDTO> getProduct(String ean) {
         final Optional<Product> optionalProduct = this.productRepository.findByEan(ean);
         return optionalProduct.map(ProductMapper.INSTANCE::product2ProductResponseDto);
+    }
+
+    @Override
+    public Optional<ProductResponseDTO> addProduct(ProductRequestDTO productRequestDTO) {
+        return Optional.empty();
     }
 }
