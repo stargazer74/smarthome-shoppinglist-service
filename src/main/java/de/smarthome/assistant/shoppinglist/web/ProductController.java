@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/product")
 public class ProductController {
@@ -67,5 +69,25 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> insert(ProductRequestDTO productRequestDTO) {
         return product.addProduct(productRequestDTO).map(productResponseDTO -> ResponseEntity.ok().body(productResponseDTO))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Delete a product.
+     *
+     * @param id the product id to delete
+     */
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") Long id) {
+        product.deleteProduct(id);
+    }
+
+    /**
+     * Return all products
+     *
+     * @return List<ProductResponseDTO> a list of all products
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<ProductResponseDTO> list(){
+        return product.listProducts();
     }
 }
