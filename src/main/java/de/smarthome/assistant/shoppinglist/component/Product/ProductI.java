@@ -25,6 +25,8 @@ package de.smarthome.assistant.shoppinglist.component.Product;
 
 import de.smarthome.assistant.shoppinglist.web.dto.ProductRequestDTO;
 import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductI {
@@ -32,5 +34,9 @@ public interface ProductI {
     Optional<ProductResponseDTO> getProduct(String ean);
 
     Optional<ProductResponseDTO> addProduct(ProductRequestDTO productRequestDTO);
+
+    void deleteProduct(Long id);
+
+    List<ProductResponseDTO> listProducts();
 
 }

@@ -28,6 +28,8 @@ import de.smarthome.assistant.shoppinglist.model.Product;
 import de.smarthome.assistant.shoppinglist.repository.ProductRepositoryI;
 import de.smarthome.assistant.shoppinglist.web.dto.ProductRequestDTO;
 import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -58,5 +60,15 @@ public class ProductDC implements ProductI {
     @Override
     public Optional<ProductResponseDTO> addProduct(ProductRequestDTO productRequestDTO) {
         return Optional.empty();
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+
+    }
+
+    @Override
+    public List<ProductResponseDTO> listProducts() {
+        return null;
     }
 }
