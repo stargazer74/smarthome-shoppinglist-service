@@ -26,7 +26,9 @@ package de.smarthome.assistant.shoppinglist.repository;
 import de.smarthome.assistant.shoppinglist.model.Product;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductRepositoryI extends JpaRepository<Product, Long> {
     Optional<Product> findByEan(String ean);
 }
