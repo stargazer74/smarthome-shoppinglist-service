@@ -25,9 +25,9 @@ package de.smarthome.assistant.shoppinglist.component.Product;
 
 import de.smarthome.assistant.shoppinglist.component.Product.mapper.ProductMapper;
 import de.smarthome.assistant.shoppinglist.model.Product;
-import de.smarthome.assistant.shoppinglist.repository.ProductRepositoryI;
-import de.smarthome.assistant.shoppinglist.web.dto.ProductRequestDTO;
-import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+import de.smarthome.assistant.shoppinglist.dao.ProductRepositoryI;
+import de.smarthome.assistant.shoppinglist.controller.dto.ProductRequestDTO;
+import de.smarthome.assistant.shoppinglist.controller.dto.ProductResponseDTO;
 
 import java.util.List;
 import java.util.Optional;

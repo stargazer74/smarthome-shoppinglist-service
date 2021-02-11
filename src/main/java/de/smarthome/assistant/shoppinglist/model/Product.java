@@ -38,9 +38,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "product")
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Product {
 
     @Id
@@ -65,44 +71,4 @@ public class Product {
 
     @Column(name = "ean", unique = true)
     private Long ean;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<ShoppingList> getShoppingLists() {
-        return shoppingLists;
-    }
-
-    public void setShoppingLists(List<ShoppingList> shoppingLists) {
-        this.shoppingLists = shoppingLists;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getEan() {
-        return ean;
-    }
-
-    public void setEan(Long ean) {
-        this.ean = ean;
-    }
 }

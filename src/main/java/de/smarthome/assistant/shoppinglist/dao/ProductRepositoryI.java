@@ -21,50 +21,14 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.web.dto;
+package de.smarthome.assistant.shoppinglist.dao;
 
-import javax.validation.constraints.NotEmpty;
+import de.smarthome.assistant.shoppinglist.model.Product;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public class ProductRequestDTO {
-
-    private Long ean;
-
-    @NotEmpty
-    private String name;
-
-    private String category;
-
-    private String subCategory;
-
-    public Long getEan() {
-        return ean;
-    }
-
-    public void setEan(Long ean) {
-        this.ean = ean;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
-    }
+@Repository
+public interface ProductRepositoryI extends JpaRepository<Product, Long> {
+    Optional<Product> findByEan(String ean);
 }

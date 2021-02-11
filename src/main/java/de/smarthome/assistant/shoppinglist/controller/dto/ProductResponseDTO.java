@@ -21,14 +21,62 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.repository;
+package de.smarthome.assistant.shoppinglist.controller.dto;
 
-import de.smarthome.assistant.shoppinglist.model.Product;
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@Repository
-public interface ProductRepositoryI extends JpaRepository<Product, Long> {
-    Optional<Product> findByEan(String ean);
+public class ProductResponseDTO {
+
+    @NotNull
+    private Long id;
+
+    @NotEmpty
+    private String name;
+
+    private String category;
+
+    private String subCategory;
+
+    private String ean;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
 }

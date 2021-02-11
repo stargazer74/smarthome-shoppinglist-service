@@ -21,62 +21,16 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.web.dto;
+package de.smarthome.assistant.shoppinglist;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public class ProductResponseDTO {
+@SpringBootApplication
+public class ShoppingListApplication {
 
-    @NotNull
-    private Long id;
+	public static void main(String[] args) {
+		SpringApplication.run(ShoppingListApplication.class, args);
+	}
 
-    @NotEmpty
-    private String name;
-
-    private String category;
-
-    private String subCategory;
-
-    private String ean;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
-    }
-
-    public String getEan() {
-        return ean;
-    }
-
-    public void setEan(String ean) {
-        this.ean = ean;
-    }
 }

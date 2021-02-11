@@ -24,11 +24,11 @@
 
 package de.smarthome.assistant.shoppinglist.service;
 
+import de.smarthome.assistant.shoppinglist.configuration.BareCodeDbConfig;
 import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
 import de.smarthome.assistant.shoppinglist.service.util.EanMarshaller;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -39,17 +39,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class EanService implements EanServiceI {
 
-    @Value("${barcodedb.url}")
-    private String baseUrl;
-
-    @Value("${barcodedb.user.id}")
-    private String userId;
+    private final BareCodeDbConfig bareCodeDbConfig;
 
     private final EanMarshaller eanMarshaller;
 
+    private final RestTemplate restTemplate;
+
     @Autowired
-    public EanService(EanMarshaller eanMarshaller) {
+    public EanService(BareCodeDbConfig bareCodeDbConfig, EanMarshaller eanMarshaller, RestTemplate restTemplate) {
+        this.bareCodeDbConfig = bareCodeDbConfig;
         this.eanMarshaller = eanMarshaller;
+        this.restTemplate = restTemplate;
     }
 
     /**
@@ -60,11 +60,10 @@ public class EanService implements EanServiceI {
      */
     @Override
     public Optional<EanRequestDTO> getProductInformation(String ean) {
-        final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(baseUrl).queryParam("ean", ean)
-                .queryParam("cmd", "query").queryParam("queryid", userId).build();
-        RestTemplate restTemplate = new RestTemplate();
+        final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(this.bareCodeDbConfig.getUrl())
+                .queryParam("ean", ean).queryParam("cmd", "query").queryParam("queryid", this.bareCodeDbConfig.getId()).build();
         String uriString = uriComponents.toUriString();
-        String result = restTemplate.getForObject(uriString, String.class);
+        String result = this.restTemplate.getForObject(uriString, String.class);
         return eanMarshaller.unmarshall(result);
     }
 }

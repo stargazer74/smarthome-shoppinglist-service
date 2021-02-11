@@ -21,11 +21,11 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.web;
+package de.smarthome.assistant.shoppinglist.controller;
 
 import de.smarthome.assistant.shoppinglist.component.Product.ProductI;
-import de.smarthome.assistant.shoppinglist.web.dto.ProductRequestDTO;
-import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+import de.smarthome.assistant.shoppinglist.controller.dto.ProductRequestDTO;
+import de.smarthome.assistant.shoppinglist.controller.dto.ProductResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

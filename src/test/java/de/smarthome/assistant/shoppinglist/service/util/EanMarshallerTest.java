@@ -25,24 +25,22 @@ package de.smarthome.assistant.shoppinglist.service.util;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import de.smarthome.assistant.shoppinglist.TestBase;
 import de.smarthome.assistant.shoppinglist.service.dto.EanRequestDTO;
 import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-public class EanMarshallerTest {
+public class EanMarshallerTest extends TestBase {
 
     private String successResponse;
 
     private String failedResponse;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         successResponse = "error=0\n" + "---\n" + "asin=\n" + "name=Gesichtscreme\n" + "detailname=Nachtcreme mit Gelee-Royale und Honig\n"
                 + "vendor=Bienen Di�tic GmbH\n" + "maincat=Kosmetische Mittel\n" + "subcat=Gesichtspflege\n" + "maincatnum=15\n"

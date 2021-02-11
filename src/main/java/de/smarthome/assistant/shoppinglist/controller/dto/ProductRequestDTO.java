@@ -21,25 +21,50 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.shoppinglist.configuration;
+package de.smarthome.assistant.shoppinglist.controller.dto;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import javax.validation.constraints.NotEmpty;
 
-@Configuration
-@EnableSwagger2
-public class SwaggerConfig {
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build();
+public class ProductRequestDTO {
+
+    private Long ean;
+
+    @NotEmpty
+    private String name;
+
+    private String category;
+
+    private String subCategory;
+
+    public Long getEan() {
+        return ean;
+    }
+
+    public void setEan(Long ean) {
+        this.ean = ean;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 }

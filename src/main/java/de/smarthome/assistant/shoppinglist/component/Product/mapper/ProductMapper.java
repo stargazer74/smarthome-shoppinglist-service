@@ -24,7 +24,7 @@
 package de.smarthome.assistant.shoppinglist.component.Product.mapper;
 
 import de.smarthome.assistant.shoppinglist.model.Product;
-import de.smarthome.assistant.shoppinglist.web.dto.ProductResponseDTO;
+import de.smarthome.assistant.shoppinglist.controller.dto.ProductResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
